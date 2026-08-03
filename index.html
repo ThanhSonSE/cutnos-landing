@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUTNOS | Steve - Automation Tools & Utilities Developer</title>
+  <meta name="description" content="Steve (CUTNOS) - Lập trình viên chuyên cung cấp các giải pháp, công cụ tự động hóa & extensions chống spam hiệu quả cao.">
+  <meta name="keywords" content="CUTNOS, Steve, Automation, Extension, Chrome, Auto Post TikTok, Tool TikTok, VietQR, Momo">
+  <meta property="og:title" content="CUTNOS | Steve - Automation Tools & Utilities Developer">
+  <meta property="og:description" content="Trang giới thiệu các công cụ tự động hóa và tiện ích cao cấp được phát triển bởi Steve (CUTNOS).">
+  <meta property="og:type" content="website">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="text-slate-100 bg-[#06080f] overflow-x-hidden selection:bg-orange-500/30 selection:text-orange-500">
+  
+  <!-- Interactive Node Canvas Background -->
+  <canvas id="node-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <div class="relative z-10 min-h-screen flex flex-col justify-between">
+    
+    <!-- Navigation Header -->
+    <header class="w-full max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+      <a href="#" class="flex items-center gap-3 group">
+        <!-- Modern Automation SVG Logo -->
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800/80 flex items-center justify-center shadow-lg group-hover:border-orange-500/40 transition duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="w-6 h-6">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5e14" />
+                <stop offset="100%" stop-color="#ff8f3d" />
+              </linearGradient>
+            </defs>
+            <path d="M6 18c0-3.3 2.7-6 6-6s6 2.7 6 6M18 6c0 3.3-2.7 6-6-6S6 9.3 6 6" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="12" cy="12" r="2.5" fill="#ffffff" />
+            <circle cx="6" cy="6" r="2" fill="url(#logoGrad)" />
+            <circle cx="18" cy="18" r="2" fill="url(#logoGrad)" />
+            <circle cx="6" cy="18" r="2" fill="#ffffff" />
+            <circle cx="18" cy="6" r="2" fill="#ffffff" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-wider text-white text-left block">CUTNOS</span>
+          <span class="block text-[10px] text-orange-500 font-bold tracking-widest uppercase -mt-1 text-left">by Steve</span>
+        </div>
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+        <a href="#about" class="hover:text-white transition duration-200">Giới thiệu</a>
+        <a href="#terminal-section" class="hover:text-white transition duration-200">Giả lập Terminal</a>
+        <a href="#tools" class="hover:text-white transition duration-200">Sản phẩm</a>
+        <button onclick="openDonateModal()" class="px-4 py-2 rounded-xl bg-orange-600/10 border border-orange-500/30 text-orange-400 hover:bg-orange-600 hover:text-white transition duration-300 font-semibold text-xs uppercase tracking-wider">Donate</button>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="openDonateModal()" class="md:hidden px-3.5 py-1.5 rounded-lg bg-orange-600/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">Donate</button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-6xl mx-auto px-6 py-10 space-y-24">
+      
+      <!-- Hero Section -->
+      <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-slate-400 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Sẵn sàng cho các giải pháp tự động hóa</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] text-white">
+            Tự động hóa mọi <span class="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">luồng công việc</span> tẻ nhạt.
+          </h1>
+          <p class="text-slate-400 text-base md:text-lg max-w-xl leading-relaxed">
+            Xin chào, tôi là <strong>Steve (CUTNOS)</strong>. Tôi chuyên thiết kế và phát triển các tiện ích mở rộng (Extensions) cùng các công cụ tự động hoá tương tác, đăng bài mạng xã hội hiệu suất cao, an toàn và chống phát hiện spam hiệu quả.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#tools" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 font-semibold text-sm hover:brightness-110 shadow-lg shadow-orange-500/20 active:translate-y-px transition duration-200 text-center">
+              Khám phá sản phẩm
+            </a>
+            <a href="#terminal-section" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-semibold text-sm hover:bg-slate-850 hover:text-white transition duration-200 text-center">
+              Chạy thử Command Line
+            </a>
+          </div>
+        </div>
+        
+        <!-- Animated Visual Dashboard Box -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-sm glass-panel p-6 rounded-3xl border border-slate-800/80 relative overflow-hidden group hover:border-orange-500/30 transition duration-500">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition duration-500"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+              <div class="flex gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500 uppercase tracking-widest">Steve.sys</span>
+            </div>
+
+            <!-- Virtual Engine Nodes UI -->
+            <div class="space-y-4 font-mono text-xs">
+              <div class="flex items-center justify-between p-3 bg-slate-950/60 rounded-xl border border-slate-900">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></div>
+                  <span class="text-slate-300">CusNotAutoPostTiktok</span>
+                </div>
+                <span class="text-orange-500 font-bold">V1.0</span>
+              </div>
+              
+              <div class="space-y-2 p-3 bg-slate-950/40 rounded-xl border border-slate-900/60 text-slate-400">
+                <div class="flex justify-between">
+                  <span>Trạng thái:</span>
+                  <span class="text-emerald-400 font-bold">Active</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Đã kiểm duyệt:</span>
+                  <span class="text-slate-300">Hoàn tất</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Anti-detection:</span>
+                  <span class="text-slate-300">Đã kích hoạt</span>
+                </div>
+              </div>
+              
+              <!-- Simulated graph lines -->
+              <div class="h-16 w-full bg-slate-950/80 rounded-xl border border-slate-900 flex items-center justify-around px-2 relative overflow-hidden">
+                <svg class="absolute inset-0 w-full h-full text-orange-500/20" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  <path d="M0,80 Q25,20 50,50 T100,20" fill="none" stroke="currentColor" stroke-width="2"></path>
+                </svg>
+                <span class="text-[9px] text-slate-600 z-10">Lượt chạy: 104,281</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terminal Emulator Section -->
+      <section id="terminal-section" class="space-y-6">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <h2 class="text-3xl font-extrabold tracking-tight text-white">Giả lập Terminal Hệ thống</h2>
+          <p class="text-slate-400 text-sm">Gõ thử các dòng lệnh để khởi động và trải nghiệm mô phỏng quy trình tự động hóa của CUTNOS.</p>
+        </div>
+
+        <!-- Terminal Window UI -->
+        <div class="w-full max-w-3xl mx-auto bg-[#0a0d16] rounded-2xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col font-mono text-sm">
+          <!-- Terminal Header Bar -->
+          <div class="bg-[#121622] px-4 py-3 flex justify-between items-center border-b border-slate-850">
+            <div class="flex gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ef4444]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#f59e0b]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#10b981]"></span>
+            </div>
+            <div class="text-xs text-slate-400 font-semibold tracking-wider">steve@cutnos-terminal: ~</div>
+            <div class="w-12"></div>
+          </div>
+
+          <!-- Terminal Output Area -->
+          <div id="terminal-output" class="p-6 h-[320px] overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+            <div>
+              <p class="text-orange-500 font-bold">CUTNOS OS (Steve Version) v1.0.0</p>
+              <p class="text-slate-500">Hệ thống đã sẵn sàng. Gõ '<span class="text-orange-400">help</span>' để xem danh sách các lệnh khả dụng.</p>
+            </div>
+          </div>
+
+          <!-- Terminal Input Area -->
+          <div class="bg-[#0b0e18] px-6 py-4 border-t border-slate-850 flex items-center gap-2">
+            <span class="text-orange-500 font-bold">steve@cutnos:~$</span>
+            <input type="text" id="terminal-input" placeholder="Gõ lệnh tại đây..." class="flex-1 bg-transparent text-slate-100 focus:outline-none caret-orange-500 font-mono" autofocus autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+      </section>
+
+      <!-- Tools & Extensions Section -->
+      <section id="tools" class="space-y-10">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <h2 class="text-3xl font-extrabold tracking-tight text-white">Sản phẩm sắp ra mắt</h2>
+          <p class="text-slate-400 text-sm">Những tiện ích cao cấp thiết kế tối ưu hiệu năng và an toàn cho tài khoản cá nhân.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- CusNotAutoPostTiktok Card -->
+          <div class="glass-panel p-8 rounded-3xl border border-slate-850 flex flex-col justify-between hover:border-orange-500/40 hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-orange-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition duration-500"></div>
+            
+            <div class="space-y-6">
+              <div class="flex justify-between items-start">
+                <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 text-2xl font-bold">
+                  🤖
+                </div>
+                <span class="text-[11px] font-bold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-wider">Sắp phát hành</span>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-orange-500 transition duration-200">CusNotAutoPostTiktok Extension</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Giải pháp Extension quản lý đa tài khoản độc lập qua Chrome Profiles. Giả lập hành vi cuộn chuột, gõ bình luận mô phỏng người thật, và tự động hóa chu kỳ đăng video kéo thả an toàn.
+                </p>
+              </div>
+
+              <!-- Badges -->
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Manifest V3</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Anti-Detection</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Auto Upload</span>
+              </div>
+            </div>
+
+            <div class="pt-8">
+              <button onclick="alert('Công cụ CusNotAutoPostTiktok đang trong những khâu hoàn thiện cuối cùng và sẽ sớm ra mắt!');" class="w-full py-3 rounded-xl bg-orange-600/10 border border-orange-500/30 text-orange-400 font-bold text-sm hover:bg-orange-500 hover:text-white transition duration-300 text-center">
+                Đăng ký nhận thông tin
+              </button>
+            </div>
+          </div>
+
+          <!-- Future General Utilities Card -->
+          <div class="glass-panel p-8 rounded-3xl border border-slate-850/80 flex flex-col justify-between hover:border-slate-700/50 transition duration-300 relative overflow-hidden group">
+            <div class="space-y-6">
+              <div class="flex justify-between items-start">
+                <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 text-2xl font-bold">
+                  ⚡
+                </div>
+                <span class="text-[10px] font-bold text-slate-500 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full uppercase tracking-wider">Nghiên cứu</span>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="text-xl font-bold text-white">Automation Flows Engine</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Công cụ thiết kế các kịch bản chạy tự động đa nền tảng trực quan bằng sơ đồ Nodes. Kéo thả luồng hoạt động, cấu hình thời gian nghỉ, click chuột và điền thông tin thông minh.
+                </p>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="text-[10px] font-mono text-slate-400 bg-slate-950 border border-slate-900 px-2 py-1 rounded-lg">Visual Flow</span>
+                <span class="text-[10px] font-mono text-slate-400 bg-slate-950 border border-slate-900 px-2 py-1 rounded-lg">Cross-platform</span>
+              </div>
+            </div>
+
+            <div class="pt-8">
+              <button class="w-full py-3 rounded-xl bg-slate-900/50 border border-slate-850 text-slate-500 font-bold text-sm cursor-not-allowed text-center" disabled>
+                Đang phát triển
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Donate Trigger Banner Section -->
+      <section class="max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-3xl border border-slate-850 text-center relative overflow-hidden group">
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-orange-500/5 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-orange-500/5 rounded-full blur-3xl"></div>
+        
+        <div class="space-y-6 relative z-10 max-w-xl mx-auto">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Ủng hộ sự phát triển công cụ</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Nếu các công cụ và tiện ích tự động hóa của tôi giúp ích cho công việc và tiết kiệm thời gian của bạn, hãy cân nhắc quyên góp (donate) một khoản nhỏ để tiếp thêm động lực nghiên cứu các giải pháp cao cấp hơn nữa.
+          </p>
+          <div class="pt-2">
+            <button onclick="openDonateModal()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-sm hover:brightness-110 shadow-lg shadow-orange-500/25 active:translate-y-px transition duration-200">
+              Quyên góp qua QR Code
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-slate-900 bg-[#04060b] py-8 text-center text-xs text-slate-500 mt-20 relative z-10">
+      <p>&copy; 2026 CUTNOS Tools. Thiết kế và phát triển bởi Steve.</p>
+    </footer>
+
+    <!-- Donate Modal -->
+    <div id="donate-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 hidden z-50 transition duration-300">
+      <div class="glass-panel w-full max-w-sm p-6 rounded-2xl border border-slate-800 shadow-2xl relative flex flex-col items-center">
+        <!-- Close Button -->
+        <button onclick="closeDonateModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+
+        <h3 class="text-xl font-bold text-white mb-5">Ủng hộ tác giả Steve</h3>
+        
+        <!-- Toggle Tabs -->
+        <div class="flex w-full bg-slate-950/80 rounded-xl p-1 mb-6 border border-slate-900">
+          <button onclick="switchDonateTab('bank')" id="tab-bank" class="flex-1 py-2 text-xs font-bold rounded-lg text-white bg-orange-600 transition duration-200">Ngân hàng</button>
+          <button onclick="switchDonateTab('momo')" id="tab-momo" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition duration-200">Ví Momo</button>
+        </div>
+
+        <!-- Bank QR Pane -->
+        <div id="pane-bank" class="w-full flex flex-col items-center space-y-4">
+          <div class="p-2.5 bg-white rounded-2xl shadow-lg border border-slate-200">
+            <img src="assets/bank_qr_mock.svg" alt="Ngân hàng VietQR Steve" class="w-[200px] h-[267px]">
+          </div>
+          <div class="text-center font-mono text-xs text-slate-400">
+            <p>MB BANK (Ngân hàng Quân Đội)</p>
+            <p class="text-slate-200 font-semibold mt-0.5">Số TK: 9999-8888-7777</p>
+          </div>
+        </div>
+
+        <!-- Momo QR Pane -->
+        <div id="pane-momo" class="w-full flex flex-col items-center space-y-4 hidden">
+          <div class="p-2.5 bg-white rounded-2xl shadow-lg border border-slate-200">
+            <img src="assets/momo_qr_mock.svg" alt="Momo QR Steve" class="w-[200px] h-[267px]">
+          </div>
+          <div class="text-center font-mono text-xs text-slate-400">
+            <p>Ví Điện Tử MoMo</p>
+            <p class="text-slate-200 font-semibold mt-0.5">SĐT: 0999-888-777</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
