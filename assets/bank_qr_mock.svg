@@ -52,12 +52,12 @@
     <rect x="190" y="260" width="45" height="10" rx="1"/>
     
     <!-- Small design logo center -->
-    <rect x="135" y="185" width="30" height="30" rx="8" fill="#ff5e14"/>
-    <text x="150" y="205" font-family="'Outfit', sans-serif" font-weight="900" font-size="15" fill="#ffffff" text-anchor="middle">C</text>
+    <rect x="135" y="185" width="30" height="30" rx="8" fill="#00b14f"/>
+    <text x="150" y="205" font-family="'Outfit', sans-serif" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">VPB</text>
   </g>
   
   <!-- Footer Info -->
-  <text x="150" y="340" font-family="'Outfit', sans-serif" font-weight="500" font-size="12" fill="#a0aec0" text-anchor="middle">Số tài khoản: 9999-8888-7777</text>
-  <text x="150" y="360" font-family="'Outfit', sans-serif" font-weight="600" font-size="13" fill="#ffffff" text-anchor="middle">MB BANK - NGUYEN VAN STEVE</text>
+  <text x="150" y="340" font-family="'Outfit', sans-serif" font-weight="500" font-size="12" fill="#a0aec0" text-anchor="middle">Số tài khoản: 0588484810</text>
+  <text x="150" y="360" font-family="'Outfit', sans-serif" font-weight="600" font-size="13" fill="#ffffff" text-anchor="middle">VPBANK - NGUYEN THANH SON</text>
   <text x="150" y="378" font-family="'Outfit', sans-serif" font-weight="400" font-size="10" fill="#718096" text-anchor="middle">Cảm ơn sự đóng góp của bạn!</text>
 </svg>
