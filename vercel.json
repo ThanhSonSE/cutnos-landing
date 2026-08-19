@@ -5,6 +5,8 @@
     { "source": "/privacy-policy", "destination": "/privacy.html" },
     { "source": "/policy", "destination": "/privacy.html" },
     { "source": "/privacy/promptvault", "destination": "/promptvault-privacy.html" },
-    { "source": "/privacy/clipbrief", "destination": "/clipbrief-privacy.html" }
+    { "source": "/privacy/clipbrief", "destination": "/clipbrief-privacy.html" },
+    { "source": "/privacy/affiscout", "destination": "/affiscout-privacy.html" },
+    { "source": "/privacy/affiscout-pro", "destination": "/affiscout-privacy.html" }
   ]
 }
