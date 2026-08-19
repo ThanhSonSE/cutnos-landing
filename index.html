@@ -179,7 +179,42 @@
           <p class="text-slate-400 text-sm">Những tiện ích cao cấp thiết kế tối ưu hiệu năng và an toàn cho tài khoản cá nhân.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- PromptVault Pro Card (Day 1 Release) -->
+          <div class="glass-panel p-8 rounded-3xl border border-orange-500/40 flex flex-col justify-between hover:border-orange-500 hover:-translate-y-1 transition duration-300 relative overflow-hidden group shadow-lg shadow-orange-500/10">
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition duration-500"></div>
+            
+            <div class="space-y-6">
+              <div class="flex justify-between items-start">
+                <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center p-2 shadow-lg group-hover:border-orange-500/40 transition duration-300">
+                  <img src="assets/promptvault-icon.png" alt="PromptVault Pro Extension" class="w-full h-full object-contain rounded-xl">
+                </div>
+                <span class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full uppercase tracking-wider">Ready to publish</span>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-orange-500 transition duration-200">PromptVault Pro — AI Prompt Studio</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Quản lý, tìm kiếm và chèn prompt AI với biến động thông minh (<code class="text-orange-400 font-mono text-xs">{{variables}}</code>) vào ChatGPT, Claude & DeepSeek chỉ trong 1 giây qua phím tắt. 100% Local-First.
+                </p>
+              </div>
+
+              <!-- Badges -->
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Manifest V3</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Local-First</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Variable Injector</span>
+              </div>
+            </div>
+
+            <div class="pt-8">
+              <div class="flex gap-3">
+                <button class="flex-1 py-3 rounded-xl bg-orange-600/10 border border-orange-500/30 text-orange-400 font-bold text-sm hover:bg-orange-500 hover:text-white transition duration-300 text-center" onclick="alert('PromptVault Pro đã hoàn thiện phiên bản v1.0.0 và đang chuẩn bị đưa lên Chrome Web Store!');">CWS: Coming Soon</button>
+                <a href="/privacy/promptvault" class="py-3 px-3 rounded-xl border border-orange-500/30 text-orange-400 text-xs font-bold hover:bg-orange-500 hover:text-white transition flex items-center justify-center">Privacy</a>
+              </div>
+            </div>
+          </div>
+
           <!-- CusNotAutoPostTiktok Card -->
           <div class="glass-panel p-8 rounded-3xl border border-slate-850 flex flex-col justify-between hover:border-orange-500/40 hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
             <div class="absolute -top-16 -right-16 w-36 h-36 bg-orange-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition duration-500"></div>
@@ -214,33 +249,35 @@
             </div>
           </div>
 
-          <!-- Future General Utilities Card -->
-          <div class="glass-panel p-8 rounded-3xl border border-slate-850/80 flex flex-col justify-between hover:border-slate-700/50 transition duration-300 relative overflow-hidden group">
+          <!-- ClipBrief Card -->
+          <div class="glass-panel p-8 rounded-3xl border border-slate-850/80 flex flex-col justify-between hover:border-orange-500/40 hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
             <div class="space-y-6">
               <div class="flex justify-between items-start">
-                <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 text-2xl font-bold">
-                  ⚡
+                <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 text-xs font-black">
+                  CB
                 </div>
-                <span class="text-[10px] font-bold text-slate-500 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full uppercase tracking-wider">Nghiên cứu</span>
+                <span class="text-[10px] font-bold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-wider">Coming soon</span>
               </div>
               
               <div class="space-y-2">
-                <h3 class="text-xl font-bold text-white">Automation Flows Engine</h3>
+                <h3 class="text-xl font-bold text-white group-hover:text-orange-500 transition duration-200">ClipBrief — Research Clips</h3>
                 <p class="text-slate-400 text-sm leading-relaxed">
-                  Công cụ thiết kế các kịch bản chạy tự động đa nền tảng trực quan bằng sơ đồ Nodes. Kéo thả luồng hoạt động, cấu hình thời gian nghỉ, click chuột và điền thông tin thông minh.
+                  Lưu đoạn văn bản bạn chủ động chọn trên trang web vào một research brief riêng tư trên trình duyệt. Gắn tag, giữ nguồn và xuất Markdown — không tài khoản, không analytics, không gửi dữ liệu lên server.
                 </p>
               </div>
 
               <div class="flex flex-wrap gap-2 pt-2">
-                <span class="text-[10px] font-mono text-slate-400 bg-slate-950 border border-slate-900 px-2 py-1 rounded-lg">Visual Flow</span>
-                <span class="text-[10px] font-mono text-slate-400 bg-slate-950 border border-slate-900 px-2 py-1 rounded-lg">Cross-platform</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Manifest V3</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Local-first</span>
+                <span class="text-[10px] font-mono text-slate-300 bg-slate-900 border border-slate-800 px-2 py-1 rounded-lg">Markdown export</span>
               </div>
             </div>
 
             <div class="pt-8">
-              <button class="w-full py-3 rounded-xl bg-slate-900/50 border border-slate-850 text-slate-500 font-bold text-sm cursor-not-allowed text-center" disabled>
-                Đang phát triển
-              </button>
+              <div class="flex gap-3">
+                <button class="flex-1 py-3 rounded-xl bg-slate-900/50 border border-slate-850 text-slate-500 font-bold text-sm cursor-not-allowed text-center" disabled>Chrome Web Store: Coming soon</button>
+                <a href="clipbrief-privacy.html" class="py-3 px-3 rounded-xl border border-orange-500/30 text-orange-400 text-xs font-bold hover:bg-orange-500 hover:text-white transition">Privacy</a>
+              </div>
             </div>
           </div>
         </div>

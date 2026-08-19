@@ -3,6 +3,8 @@
   "rewrites": [
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/privacy-policy", "destination": "/privacy.html" },
-    { "source": "/policy", "destination": "/privacy.html" }
+    { "source": "/policy", "destination": "/privacy.html" },
+    { "source": "/privacy/promptvault", "destination": "/promptvault-privacy.html" },
+    { "source": "/privacy/clipbrief", "destination": "/clipbrief-privacy.html" }
   ]
 }
