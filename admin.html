@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CutNos Admin — Duyệt Thanh Toán</title>
   <meta name="robots" content="noindex, nofollow">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg-primary: #0a0a0b;
@@ -34,7 +42,10 @@
       --radius-sm: 8px;
     }
 
-    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -47,202 +58,472 @@
 
     /* ═══════════ LOGIN ═══════════ */
     .login-container {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; min-height: 100dvh; padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 24px;
     }
 
     .login-card {
-      width: 100%; max-width: 380px;
-      background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 20px; padding: 40px 32px; text-align: center;
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
       animation: fadeSlideUp 0.5s ease;
     }
 
-    .login-icon { font-size: 48px; margin-bottom: 16px; }
-    .login-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
-    .login-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 28px; }
+    .login-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
 
-    .form-group { margin-bottom: 16px; text-align: left; }
+    .login-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .login-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
 
     .form-label {
-      display: block; font-size: 11px; font-weight: 700;
-      color: var(--text-secondary); margin-bottom: 6px;
-      text-transform: uppercase; letter-spacing: 0.5px;
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .form-input {
-      width: 100%; padding: 12px 14px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); color: var(--text-primary);
-      font-size: 14px; font-family: inherit; outline: none;
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
       transition: border-color 0.2s;
     }
 
-    .form-input:focus { border-color: var(--accent); }
-    .form-input::placeholder { color: var(--text-muted); }
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
 
     .login-btn {
-      width: 100%; padding: 14px;
+      width: 100%;
+      padding: 14px;
       background: linear-gradient(135deg, var(--accent), #e6a800);
-      color: #000; border: none; border-radius: var(--radius-sm);
-      font-size: 14px; font-weight: 800; cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s; margin-top: 8px;
+      color: #000;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 8px;
     }
 
-    .login-btn:hover { opacity: 0.9; }
-    .login-btn:active { transform: scale(0.98); }
-    .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .login-btn:active {
+      transform: scale(0.98);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
     .login-error {
-      background: var(--danger-bg); color: var(--danger);
-      padding: 10px 14px; border-radius: var(--radius-sm);
-      font-size: 12px; font-weight: 600; margin-top: 16px; display: none;
+      background: var(--danger-bg);
+      color: var(--danger);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 16px;
+      display: none;
     }
 
-    .login-error.show { display: block; animation: shake 0.4s ease; }
+    .login-error.show {
+      display: block;
+      animation: shake 0.4s ease;
+    }
 
     /* ═══════════ DASHBOARD ═══════════ */
     .admin-header {
-      background: var(--bg-secondary); border-bottom: 1px solid var(--border);
-      padding: 14px 16px; display: flex; justify-content: space-between;
-      align-items: center; position: sticky; top: 0; z-index: 100;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    .admin-header h1 { font-size: 15px; font-weight: 900; }
-    .admin-header-sub { font-size: 9px; color: var(--text-muted); margin-top: 1px; }
-    .admin-header-right { text-align: right; }
-    .admin-email { font-size: 10px; color: var(--accent); font-weight: 700; }
-    .admin-role { font-size: 9px; color: var(--text-muted); }
+    .admin-header h1 {
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .admin-header-sub {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .admin-header-right {
+      text-align: right;
+    }
+
+    .admin-email {
+      font-size: 10px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .admin-role {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
 
     .logout-btn {
-      font-size: 9px; color: var(--danger); background: none; border: none;
-      cursor: pointer; padding: 2px 0; font-weight: 600; font-family: inherit;
+      font-size: 9px;
+      color: var(--danger);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 0;
+      font-weight: 600;
+      font-family: inherit;
     }
 
-    .logout-btn:hover { text-decoration: underline; }
+    .logout-btn:hover {
+      text-decoration: underline;
+    }
 
-    .admin-content { max-width: 700px; margin: 0 auto; padding: 16px; }
+    .admin-content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 16px;
+    }
 
     /* Filter */
-    .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
 
     .filter-btn {
-      padding: 8px 14px; border-radius: var(--radius-sm);
-      border: 1px solid var(--border); background: var(--bg-card);
-      color: var(--text-muted); font-weight: 700; font-size: 11px;
-      cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .filter-btn.active {
-      border-color: var(--accent); background: var(--accent-bg); color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      color: var(--accent);
     }
 
     .refresh-btn {
-      margin-left: auto; padding: 8px 14px; border-radius: var(--radius-sm);
-      border: 1px solid var(--border); background: var(--bg-card);
-      color: var(--text-muted); font-weight: 700; font-size: 11px;
-      cursor: pointer; font-family: inherit; transition: all 0.2s;
+      margin-left: auto;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
     }
 
-    .refresh-btn:active { transform: scale(0.95); }
+    .refresh-btn:active {
+      transform: scale(0.95);
+    }
 
     /* Order Cards */
     .order-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
-      animation: fadeSlideUp 0.3s ease; transition: border-color 0.2s;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      animation: fadeSlideUp 0.3s ease;
+      transition: border-color 0.2s;
     }
 
-    .order-card:hover { border-color: var(--border-hover); }
+    .order-card:hover {
+      border-color: var(--border-hover);
+    }
 
     .order-header {
-      display: flex; justify-content: space-between;
-      align-items: center; margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
     }
 
     .order-id {
-      font-size: 13px; font-weight: 900; color: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--accent);
       font-family: 'Courier New', monospace;
     }
 
-    .status-badge { padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; }
-    .status-pending { background: var(--pending-bg); color: var(--pending-text); }
-    .status-waiting { background: var(--warning-bg); color: var(--warning); }
-    .status-approved { background: var(--success-bg); color: var(--success); }
-    .status-rejected { background: var(--danger-bg); color: var(--danger); }
-
-    .order-details {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; font-size: 11px; color: var(--text-secondary);
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .order-details .detail-full { grid-column: 1 / -1; }
-    .order-details .val { color: var(--text-primary); font-weight: 600; }
-    .order-details .val-amount { color: var(--accent); font-weight: 700; }
-    .order-details .val-transfer { color: var(--success); font-weight: 700; }
+    .status-pending {
+      background: var(--pending-bg);
+      color: var(--pending-text);
+    }
 
-    .order-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .status-waiting {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
 
-    .btn-approve, .btn-reject {
-      flex: 1; padding: 10px; border: none; border-radius: var(--radius-sm);
-      font-weight: 800; font-size: 11px; cursor: pointer; font-family: inherit;
+    .status-approved {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-rejected {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .order-details .detail-full {
+      grid-column: 1 / -1;
+    }
+
+    .order-details .val {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .order-details .val-amount {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .order-details .val-transfer {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-approve,
+    .btn-reject {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
       transition: opacity 0.2s, transform 0.1s;
     }
 
-    .btn-approve { background: var(--success-btn); color: #fff; }
-    .btn-reject { background: var(--danger-btn); color: #fca5a5; }
-    .btn-approve:active, .btn-reject:active { transform: scale(0.97); }
-    .btn-approve:disabled, .btn-reject:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .order-timestamp { font-size: 10px; margin-top: 8px; }
-    .order-timestamp.approved { color: var(--success); }
-    .order-timestamp.rejected { color: var(--danger); }
-
-    .empty-state, .loading-state {
-      text-align: center; padding: 48px 24px;
-      color: var(--text-muted); font-size: 13px;
+    .btn-approve {
+      background: var(--success-btn);
+      color: #fff;
     }
 
-    .loading-state { color: var(--accent); }
-    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .btn-reject {
+      background: var(--danger-btn);
+      color: #fca5a5;
+    }
+
+    .btn-approve:active,
+    .btn-reject:active {
+      transform: scale(0.97);
+    }
+
+    .btn-approve:disabled,
+    .btn-reject:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .order-timestamp {
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    .order-timestamp.approved {
+      color: var(--success);
+    }
+
+    .order-timestamp.rejected {
+      color: var(--danger);
+    }
+
+    .empty-state,
+    .loading-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .loading-state {
+      color: var(--accent);
+    }
+
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
 
     /* Toast */
     .toast {
-      position: fixed; bottom: 24px; left: 50%;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 12px 20px;
-      font-size: 12px; font-weight: 600; z-index: 1000;
-      opacity: 0; transition: all 0.3s ease; pointer-events: none; max-width: 90vw;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      max-width: 90vw;
     }
 
-    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-    .toast.success { border-color: var(--success-btn); color: var(--success); }
-    .toast.error { border-color: var(--danger-btn); color: var(--danger); }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      border-color: var(--success-btn);
+      color: var(--success);
+    }
+
+    .toast.error {
+      border-color: var(--danger-btn);
+      color: var(--danger);
+    }
 
     /* Animations */
     @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      75% { transform: translateX(6px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-6px);
+      }
+
+      75% {
+        transform: translateX(6px);
+      }
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .spin { display: inline-block; animation: spin 1s linear infinite; }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spin {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
 
     @media (max-width: 420px) {
-      .login-card { padding: 32px 20px; }
-      .order-details { grid-template-columns: 1fr; }
-      .admin-header h1 { font-size: 13px; }
+      .login-card {
+        padding: 32px 20px;
+      }
+
+      .order-details {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-header h1 {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
+
 <body>
   <div id="admin-root"></div>
   <div id="toast" class="toast"></div>
@@ -258,6 +539,13 @@
     const FIREBASE_CONFIG = {
       apiKey: 'AIzaSyCws6uxaHxMp0XwhNhdqJhmlISBZ75vSJE',
       projectId: 'cut-nos'
+    };
+
+    // ═══════ EmailJS CONFIG (setup at emailjs.com) ═══════
+    const EMAILJS_CONFIG = {
+      publicKey: 'GZnvpBRGz0tcusYcu',     // Lấy từ EmailJS > Account > Public Key
+      serviceId: 'service_4954l6a',     // Lấy từ EmailJS > Email Services
+      templateUserApproved: 'template_8y62lu6'  // Template gửi cho user khi được duyệt
     };
 
     const AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts';
@@ -283,7 +571,7 @@
         localStorage.setItem('cutnos_admin_session', JSON.stringify({
           token: state.token, refreshToken: state.refreshToken, email: state.email
         }));
-      } catch (e) {}
+      } catch (e) { }
     }
 
     function loadSession() {
@@ -295,14 +583,14 @@
           state.email = d.email;
           return true;
         }
-      } catch (e) {}
+      } catch (e) { }
       return false;
     }
 
     function clearSession() {
       state.token = ''; state.refreshToken = ''; state.email = '';
       state.orders = []; state.screen = 'login';
-      try { localStorage.removeItem('cutnos_admin_session'); } catch (e) {}
+      try { localStorage.removeItem('cutnos_admin_session'); } catch (e) { }
     }
 
     // ═══════ AUTH ═══════
@@ -349,7 +637,7 @@
           saveSession();
           return true;
         }
-      } catch (e) {}
+      } catch (e) { }
       return false;
     }
 
@@ -405,19 +693,19 @@
       try {
         const query = state.filter === 'waiting_confirmation'
           ? {
-              structuredQuery: {
-                from: [{ collectionId: 'orders' }],
-                where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'waiting_confirmation' } } },
-                orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }]
-              }
+            structuredQuery: {
+              from: [{ collectionId: 'orders' }],
+              where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'waiting_confirmation' } } },
+              orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }]
             }
+          }
           : {
-              structuredQuery: {
-                from: [{ collectionId: 'orders' }],
-                orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
-                limit: 100
-              }
-            };
+            structuredQuery: {
+              from: [{ collectionId: 'orders' }],
+              orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
+              limit: 100
+            }
+          };
 
         const res = await firestoreRequest(':runQuery', { method: 'POST', body: JSON.stringify(query) });
         if (!res.ok) { state.orders = []; }
@@ -446,10 +734,12 @@
 
         await firestoreRequest(`/orders/${orderId}?updateMask.fieldPaths=status&updateMask.fieldPaths=approvedAt`, {
           method: 'PATCH',
-          body: JSON.stringify({ fields: {
-            status: { stringValue: 'approved' },
-            approvedAt: { stringValue: new Date().toISOString() }
-          }})
+          body: JSON.stringify({
+            fields: {
+              status: { stringValue: 'approved' },
+              approvedAt: { stringValue: new Date().toISOString() }
+            }
+          })
         });
 
         // Upgrade user PRO
@@ -466,7 +756,7 @@
               if (!isNaN(d.getTime()) && d > baseDate) baseDate = d;
             }
           }
-        } catch (e) {}
+        } catch (e) { }
 
         let addDays = 30;
         if (order.plan === 'weekly') addDays = 7;
@@ -475,14 +765,19 @@
 
         await firestoreRequest(`/users/${userId}?updateMask.fieldPaths=tier&updateMask.fieldPaths=post_limit&updateMask.fieldPaths=workflow_limit&updateMask.fieldPaths=pro_expires_at&updateMask.fieldPaths=updatedAt`, {
           method: 'PATCH',
-          body: JSON.stringify({ fields: {
-            tier: { stringValue: 'pro' },
-            post_limit: { integerValue: 999999 },
-            workflow_limit: { integerValue: 999999 },
-            pro_expires_at: { stringValue: proExpiresAt },
-            updatedAt: { stringValue: new Date().toISOString() }
-          }})
+          body: JSON.stringify({
+            fields: {
+              tier: { stringValue: 'pro' },
+              post_limit: { integerValue: 999999 },
+              workflow_limit: { integerValue: 999999 },
+              pro_expires_at: { stringValue: proExpiresAt },
+              updatedAt: { stringValue: new Date().toISOString() }
+            }
+          })
         });
+
+        // Send email notification to user
+        await sendEmailToUser(order, proExpiresAt);
 
         showToast(`✅ Đã duyệt đơn ${orderId}!`, 'success');
         await loadOrders();
@@ -499,10 +794,12 @@
       try {
         await firestoreRequest(`/orders/${orderId}?updateMask.fieldPaths=status&updateMask.fieldPaths=rejectedAt`, {
           method: 'PATCH',
-          body: JSON.stringify({ fields: {
-            status: { stringValue: 'rejected' },
-            rejectedAt: { stringValue: new Date().toISOString() }
-          }})
+          body: JSON.stringify({
+            fields: {
+              status: { stringValue: 'rejected' },
+              rejectedAt: { stringValue: new Date().toISOString() }
+            }
+          })
         });
         showToast(`❌ Đã từ chối đơn ${orderId}`, 'success');
         await loadOrders();
@@ -510,6 +807,38 @@
         showToast('Lỗi: ' + (e.message || 'Unknown'), 'error');
       }
       state.actionLoading = null; render();
+    }
+
+    // ═══════ EMAILJS ═══════
+    async function sendEmailToUser(order, proExpiresAt) {
+      if (EMAILJS_CONFIG.publicKey === 'YOUR_EMAILJS_PUBLIC_KEY') {
+        console.warn('[EmailJS] Chưa cấu hình. Bỏ qua gửi email.');
+        return;
+      }
+      try {
+        const planNames = { weekly: 'Tuần (7 ngày)', monthly: 'Tháng (30 ngày)', yearly: 'Năm (365 ngày)' };
+        const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: EMAILJS_CONFIG.serviceId,
+            template_id: EMAILJS_CONFIG.templateUserApproved,
+            user_id: EMAILJS_CONFIG.publicKey,
+            template_params: {
+              to_email: order.userEmail,
+              user_name: order.userName || order.userEmail.split('@')[0],
+              order_id: order.orderId,
+              plan: planNames[order.plan] || order.plan,
+              amount: formatAmount(order.amount),
+              expires_at: new Date(proExpiresAt).toLocaleDateString('vi-VN')
+            }
+          })
+        });
+        if (res.ok) console.log('[EmailJS] Đã gửi email tới user:', order.userEmail);
+        else console.error('[EmailJS] Gửi thất bại:', res.status);
+      } catch (e) {
+        console.error('[EmailJS] Error:', e);
+      }
     }
 
     // ═══════ HELPERS ═══════
@@ -528,10 +857,10 @@
 
     function statusBadge(status) {
       const map = {
-        pending:              { cls: 'status-pending', label: 'Chờ CK' },
+        pending: { cls: 'status-pending', label: 'Chờ CK' },
         waiting_confirmation: { cls: 'status-waiting', label: '⏳ Chờ duyệt' },
-        approved:             { cls: 'status-approved', label: '✅ Đã duyệt' },
-        rejected:             { cls: 'status-rejected', label: '❌ Từ chối' }
+        approved: { cls: 'status-approved', label: '✅ Đã duyệt' },
+        rejected: { cls: 'status-rejected', label: '❌ Từ chối' }
       };
       const s = map[status] || map.pending;
       return `<span class="status-badge ${s.cls}">${s.label}</span>`;
@@ -720,4 +1049,5 @@
     }
   </script>
 </body>
+
 </html>
