@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CutNos Admin — Duyệt Thanh Toán</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #131314;
+      --bg-card: #1a1a1b;
+      --border: #2a2a2b;
+      --border-hover: #3a3a3b;
+      --text-primary: #ffffff;
+      --text-secondary: #aaaaaa;
+      --text-muted: #666666;
+      --accent: #f2c111;
+      --accent-bg: rgba(242, 193, 17, 0.12);
+      --success: #34d399;
+      --success-bg: #064e3b;
+      --success-btn: #059669;
+      --danger: #f87171;
+      --danger-bg: #450a0a;
+      --danger-btn: #7f1d1d;
+      --warning: #fbbf24;
+      --warning-bg: #78350f;
+      --pending-text: #999999;
+      --pending-bg: #333333;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════ LOGIN ═══════════ */
+    .login-container {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; min-height: 100dvh; padding: 24px;
+    }
+
+    .login-card {
+      width: 100%; max-width: 380px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px 32px; text-align: center;
+      animation: fadeSlideUp 0.5s ease;
+    }
+
+    .login-icon { font-size: 48px; margin-bottom: 16px; }
+    .login-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .login-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 16px; text-align: left; }
+
+    .form-label {
+      display: block; font-size: 11px; font-weight: 700;
+      color: var(--text-secondary); margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%; padding: 12px 14px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary);
+      font-size: 14px; font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus { border-color: var(--accent); }
+    .form-input::placeholder { color: var(--text-muted); }
+
+    .login-btn {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--accent), #e6a800);
+      color: #000; border: none; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 800; cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s; margin-top: 8px;
+    }
+
+    .login-btn:hover { opacity: 0.9; }
+    .login-btn:active { transform: scale(0.98); }
+    .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .login-error {
+      background: var(--danger-bg); color: var(--danger);
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 600; margin-top: 16px; display: none;
+    }
+
+    .login-error.show { display: block; animation: shake 0.4s ease; }
+
+    /* ═══════════ DASHBOARD ═══════════ */
+    .admin-header {
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border);
+      padding: 14px 16px; display: flex; justify-content: space-between;
+      align-items: center; position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+
+    .admin-header h1 { font-size: 15px; font-weight: 900; }
+    .admin-header-sub { font-size: 9px; color: var(--text-muted); margin-top: 1px; }
+    .admin-header-right { text-align: right; }
+    .admin-email { font-size: 10px; color: var(--accent); font-weight: 700; }
+    .admin-role { font-size: 9px; color: var(--text-muted); }
+
+    .logout-btn {
+      font-size: 9px; color: var(--danger); background: none; border: none;
+      cursor: pointer; padding: 2px 0; font-weight: 600; font-family: inherit;
+    }
+
+    .logout-btn:hover { text-decoration: underline; }
+
+    .admin-content { max-width: 700px; margin: 0 auto; padding: 16px; }
+
+    /* Filter */
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+
+    .filter-btn {
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg-card);
+      color: var(--text-muted); font-weight: 700; font-size: 11px;
+      cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap;
+    }
+
+    .filter-btn.active {
+      border-color: var(--accent); background: var(--accent-bg); color: var(--accent);
+    }
+
+    .refresh-btn {
+      margin-left: auto; padding: 8px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg-card);
+      color: var(--text-muted); font-weight: 700; font-size: 11px;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+
+    .refresh-btn:active { transform: scale(0.95); }
+
+    /* Order Cards */
+    .order-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+      animation: fadeSlideUp 0.3s ease; transition: border-color 0.2s;
+    }
+
+    .order-card:hover { border-color: var(--border-hover); }
+
+    .order-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 12px;
+    }
+
+    .order-id {
+      font-size: 13px; font-weight: 900; color: var(--accent);
+      font-family: 'Courier New', monospace;
+    }
+
+    .status-badge { padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; }
+    .status-pending { background: var(--pending-bg); color: var(--pending-text); }
+    .status-waiting { background: var(--warning-bg); color: var(--warning); }
+    .status-approved { background: var(--success-bg); color: var(--success); }
+    .status-rejected { background: var(--danger-bg); color: var(--danger); }
+
+    .order-details {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; font-size: 11px; color: var(--text-secondary);
+    }
+
+    .order-details .detail-full { grid-column: 1 / -1; }
+    .order-details .val { color: var(--text-primary); font-weight: 600; }
+    .order-details .val-amount { color: var(--accent); font-weight: 700; }
+    .order-details .val-transfer { color: var(--success); font-weight: 700; }
+
+    .order-actions { display: flex; gap: 8px; margin-top: 14px; }
+
+    .btn-approve, .btn-reject {
+      flex: 1; padding: 10px; border: none; border-radius: var(--radius-sm);
+      font-weight: 800; font-size: 11px; cursor: pointer; font-family: inherit;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .btn-approve { background: var(--success-btn); color: #fff; }
+    .btn-reject { background: var(--danger-btn); color: #fca5a5; }
+    .btn-approve:active, .btn-reject:active { transform: scale(0.97); }
+    .btn-approve:disabled, .btn-reject:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .order-timestamp { font-size: 10px; margin-top: 8px; }
+    .order-timestamp.approved { color: var(--success); }
+    .order-timestamp.rejected { color: var(--danger); }
+
+    .empty-state, .loading-state {
+      text-align: center; padding: 48px 24px;
+      color: var(--text-muted); font-size: 13px;
+    }
+
+    .loading-state { color: var(--accent); }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 20px;
+      font-size: 12px; font-weight: 600; z-index: 1000;
+      opacity: 0; transition: all 0.3s ease; pointer-events: none; max-width: 90vw;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.success { border-color: var(--success-btn); color: var(--success); }
+    .toast.error { border-color: var(--danger-btn); color: var(--danger); }
+
+    /* Animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { display: inline-block; animation: spin 1s linear infinite; }
+
+    @media (max-width: 420px) {
+      .login-card { padding: 32px 20px; }
+      .order-details { grid-template-columns: 1fr; }
+      .admin-header h1 { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="admin-root"></div>
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    // CutNos Admin Panel — Web Version
+    // Only whitelisted admin email can access
+    // ═══════════════════════════════════════════════════════════
+
+    const ADMIN_EMAILS = ['thanhson.official@gmail.com'];
+
+    const FIREBASE_CONFIG = {
+      apiKey: 'AIzaSyCws6uxaHxMp0XwhNhdqJhmlISBZ75vSJE',
+      projectId: 'cut-nos'
+    };
+
+    const AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts';
+    const FIRESTORE_URL = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents`;
+
+    // ═══════ STATE ═══════
+    const state = {
+      screen: 'login',
+      token: '',
+      refreshToken: '',
+      email: '',
+      orders: [],
+      filter: 'waiting_confirmation',
+      loading: false,
+      actionLoading: null,
+      loginLoading: false,
+      loginError: ''
+    };
+
+    // ═══════ SESSION ═══════
+    function saveSession() {
+      try {
+        localStorage.setItem('cutnos_admin_session', JSON.stringify({
+          token: state.token, refreshToken: state.refreshToken, email: state.email
+        }));
+      } catch (e) {}
+    }
+
+    function loadSession() {
+      try {
+        const d = JSON.parse(localStorage.getItem('cutnos_admin_session') || '{}');
+        if (d.token && d.email && ADMIN_EMAILS.includes(d.email.toLowerCase())) {
+          state.token = d.token;
+          state.refreshToken = d.refreshToken || '';
+          state.email = d.email;
+          return true;
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    function clearSession() {
+      state.token = ''; state.refreshToken = ''; state.email = '';
+      state.orders = []; state.screen = 'login';
+      try { localStorage.removeItem('cutnos_admin_session'); } catch (e) {}
+    }
+
+    // ═══════ AUTH ═══════
+    async function loginWithEmail(email, password) {
+      // Check admin whitelist BEFORE calling Firebase
+      if (!ADMIN_EMAILS.includes(email.toLowerCase())) {
+        throw new Error('⛔ Email này không có quyền truy cập Admin Panel');
+      }
+
+      const res = await fetch(`${AUTH_URL}:signInWithPassword?key=${FIREBASE_CONFIG.apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, returnSecureToken: true })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        const msg = data.error?.message || 'Đăng nhập thất bại';
+        const friendly = {
+          'EMAIL_NOT_FOUND': 'Email không tồn tại',
+          'INVALID_PASSWORD': 'Mật khẩu không đúng',
+          'INVALID_LOGIN_CREDENTIALS': 'Email hoặc mật khẩu không đúng',
+          'USER_DISABLED': 'Tài khoản đã bị vô hiệu hóa',
+          'TOO_MANY_ATTEMPTS_TRY_LATER': 'Quá nhiều lần thử. Vui lòng đợi.'
+        };
+        throw new Error(friendly[msg] || msg);
+      }
+
+      return { token: data.idToken, refreshToken: data.refreshToken, email: data.email };
+    }
+
+    async function refreshAuthToken() {
+      if (!state.refreshToken) return false;
+      try {
+        const res = await fetch(`https://securetoken.googleapis.com/v1/token?key=${FIREBASE_CONFIG.apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `grant_type=refresh_token&refresh_token=${state.refreshToken}`
+        });
+        const data = await res.json();
+        if (res.ok && data.id_token) {
+          state.token = data.id_token;
+          state.refreshToken = data.refresh_token || state.refreshToken;
+          saveSession();
+          return true;
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    // ═══════ FIRESTORE ═══════
+    async function firestoreRequest(path, options = {}) {
+      let res = await fetch(`${FIRESTORE_URL}${path}`, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${state.token}`,
+          ...(options.headers || {})
+        }
+      });
+
+      if (res.status === 401 || res.status === 403) {
+        const refreshed = await refreshAuthToken();
+        if (refreshed) {
+          res = await fetch(`${FIRESTORE_URL}${path}`, {
+            ...options,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${state.token}`,
+              ...(options.headers || {})
+            }
+          });
+        } else {
+          clearSession(); render();
+          showToast('Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.', 'error');
+          throw new Error('Session expired');
+        }
+      }
+      return res;
+    }
+
+    function parseOrderFields(fields) {
+      return {
+        orderId: fields?.orderId?.stringValue || '',
+        userId: fields?.userId?.stringValue || '',
+        userEmail: fields?.userEmail?.stringValue || '',
+        userName: fields?.userName?.stringValue || '',
+        plan: fields?.plan?.stringValue || 'monthly',
+        amount: parseInt(fields?.amount?.integerValue || '0', 10),
+        status: fields?.status?.stringValue || 'pending',
+        transferContent: fields?.transferContent?.stringValue || '',
+        createdAt: fields?.createdAt?.stringValue || '',
+        approvedAt: fields?.approvedAt?.stringValue || null,
+        rejectedAt: fields?.rejectedAt?.stringValue || null
+      };
+    }
+
+    async function loadOrders() {
+      state.loading = true; render();
+      try {
+        const query = state.filter === 'waiting_confirmation'
+          ? {
+              structuredQuery: {
+                from: [{ collectionId: 'orders' }],
+                where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'waiting_confirmation' } } },
+                orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }]
+              }
+            }
+          : {
+              structuredQuery: {
+                from: [{ collectionId: 'orders' }],
+                orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
+                limit: 100
+              }
+            };
+
+        const res = await firestoreRequest(':runQuery', { method: 'POST', body: JSON.stringify(query) });
+        if (!res.ok) { state.orders = []; }
+        else {
+          const results = await res.json();
+          state.orders = Array.isArray(results)
+            ? results.filter(r => r.document?.fields).map(r => parseOrderFields(r.document.fields))
+            : [];
+        }
+      } catch (e) {
+        if (e.message !== 'Session expired') { state.orders = []; }
+      }
+      state.loading = false; render();
+    }
+
+    async function approveOrder(orderId) {
+      if (!confirm(`Xác nhận DUYỆT đơn hàng ${orderId}?\n\nĐiều này sẽ áp dụng gói PRO cho user.`)) return;
+      state.actionLoading = orderId; render();
+
+      try {
+        const orderRes = await firestoreRequest(`/orders/${orderId}`);
+        if (!orderRes.ok) throw new Error('Không tìm thấy đơn hàng');
+        const orderData = await orderRes.json();
+        const order = parseOrderFields(orderData.fields);
+        if (order.status === 'approved') throw new Error('Đơn hàng đã được duyệt trước đó');
+
+        await firestoreRequest(`/orders/${orderId}?updateMask.fieldPaths=status&updateMask.fieldPaths=approvedAt`, {
+          method: 'PATCH',
+          body: JSON.stringify({ fields: {
+            status: { stringValue: 'approved' },
+            approvedAt: { stringValue: new Date().toISOString() }
+          }})
+        });
+
+        // Upgrade user PRO
+        const userId = order.userId;
+        let baseDate = new Date();
+        try {
+          const userRes = await firestoreRequest(`/users/${userId}`);
+          if (userRes.ok) {
+            const ud = await userRes.json();
+            const tier = ud.fields?.tier?.stringValue;
+            const exp = ud.fields?.pro_expires_at?.stringValue;
+            if (tier === 'pro' && exp) {
+              const d = new Date(exp);
+              if (!isNaN(d.getTime()) && d > baseDate) baseDate = d;
+            }
+          }
+        } catch (e) {}
+
+        let addDays = 30;
+        if (order.plan === 'weekly') addDays = 7;
+        else if (order.plan === 'yearly') addDays = 365;
+        const proExpiresAt = new Date(baseDate.getTime() + addDays * 86400000).toISOString();
+
+        await firestoreRequest(`/users/${userId}?updateMask.fieldPaths=tier&updateMask.fieldPaths=post_limit&updateMask.fieldPaths=workflow_limit&updateMask.fieldPaths=pro_expires_at&updateMask.fieldPaths=updatedAt`, {
+          method: 'PATCH',
+          body: JSON.stringify({ fields: {
+            tier: { stringValue: 'pro' },
+            post_limit: { integerValue: 999999 },
+            workflow_limit: { integerValue: 999999 },
+            pro_expires_at: { stringValue: proExpiresAt },
+            updatedAt: { stringValue: new Date().toISOString() }
+          }})
+        });
+
+        showToast(`✅ Đã duyệt đơn ${orderId}!`, 'success');
+        await loadOrders();
+      } catch (e) {
+        showToast('Lỗi: ' + (e.message || 'Unknown'), 'error');
+      }
+      state.actionLoading = null; render();
+    }
+
+    async function rejectOrder(orderId) {
+      if (!confirm(`Xác nhận TỪ CHỐI đơn hàng ${orderId}?`)) return;
+      state.actionLoading = orderId; render();
+
+      try {
+        await firestoreRequest(`/orders/${orderId}?updateMask.fieldPaths=status&updateMask.fieldPaths=rejectedAt`, {
+          method: 'PATCH',
+          body: JSON.stringify({ fields: {
+            status: { stringValue: 'rejected' },
+            rejectedAt: { stringValue: new Date().toISOString() }
+          }})
+        });
+        showToast(`❌ Đã từ chối đơn ${orderId}`, 'success');
+        await loadOrders();
+      } catch (e) {
+        showToast('Lỗi: ' + (e.message || 'Unknown'), 'error');
+      }
+      state.actionLoading = null; render();
+    }
+
+    // ═══════ HELPERS ═══════
+    function formatDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleString('vi-VN');
+    }
+
+    function formatAmount(amount) { return amount.toLocaleString('vi-VN') + 'đ'; }
+
+    function planLabel(plan) {
+      if (plan === 'weekly') return '📅 Tuần (7 ngày)';
+      if (plan === 'yearly') return '🗓️ Năm (365 ngày)';
+      return '📆 Tháng (30 ngày)';
+    }
+
+    function statusBadge(status) {
+      const map = {
+        pending:              { cls: 'status-pending', label: 'Chờ CK' },
+        waiting_confirmation: { cls: 'status-waiting', label: '⏳ Chờ duyệt' },
+        approved:             { cls: 'status-approved', label: '✅ Đã duyệt' },
+        rejected:             { cls: 'status-rejected', label: '❌ Từ chối' }
+      };
+      const s = map[status] || map.pending;
+      return `<span class="status-badge ${s.cls}">${s.label}</span>`;
+    }
+
+    function showToast(message, type) {
+      const el = document.getElementById('toast');
+      el.textContent = message;
+      el.className = `toast ${type} show`;
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => { el.className = 'toast'; }, 3000);
+    }
+
+    // ═══════ RENDER ═══════
+    function render() {
+      const root = document.getElementById('admin-root');
+      if (!root) return;
+      if (state.screen === 'login') {
+        root.innerHTML = renderLogin();
+        bindLoginEvents();
+      } else {
+        root.innerHTML = renderDashboard();
+        bindDashboardEvents();
+      }
+    }
+
+    function renderLogin() {
+      return `
+        <div class="login-container">
+          <div class="login-card">
+            <div class="login-icon">🛡️</div>
+            <div class="login-title">CutNos Admin</div>
+            <div class="login-subtitle">Đăng nhập để quản lý đơn hàng & duyệt thanh toán</div>
+            <form id="login-form">
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" id="email" type="email" placeholder="admin@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="password">Mật khẩu</label>
+                <input class="form-input" id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+              </div>
+              <button type="submit" class="login-btn" id="login-btn">
+                ${state.loginLoading ? '<span class="spin">⏳</span> Đang đăng nhập...' : '🔐 Đăng nhập'}
+              </button>
+            </form>
+            <div class="login-error ${state.loginError ? 'show' : ''}">${state.loginError}</div>
+          </div>
+        </div>`;
+    }
+
+    function renderDashboard() {
+      const waitingCount = state.filter === 'waiting_confirmation'
+        ? state.orders.length
+        : state.orders.filter(o => o.status === 'waiting_confirmation').length;
+
+      let ordersHtml;
+      if (state.loading) {
+        ordersHtml = `<div class="loading-state"><div class="empty-icon"><span class="spin">⏳</span></div>Đang tải đơn hàng...</div>`;
+      } else if (state.orders.length === 0) {
+        ordersHtml = `<div class="empty-state"><div class="empty-icon">📭</div>Không có đơn hàng nào</div>`;
+      } else {
+        ordersHtml = state.orders.map(o => `
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-id">${o.orderId}</span>
+              ${statusBadge(o.status)}
+            </div>
+            <div class="order-details">
+              <div>👤 <span class="val">${o.userName || o.userEmail}</span></div>
+              <div>📧 ${o.userEmail}</div>
+              <div>📦 ${planLabel(o.plan)}</div>
+              <div>💰 <span class="val-amount">${formatAmount(o.amount)}</span></div>
+              <div class="detail-full">📝 Nội dung CK: <span class="val-transfer">${o.transferContent}</span></div>
+              <div class="detail-full">🕐 ${formatDate(o.createdAt)}</div>
+            </div>
+            ${o.status === 'waiting_confirmation' ? `
+              <div class="order-actions">
+                <button class="btn-approve" data-approve="${o.orderId}" ${state.actionLoading === o.orderId ? 'disabled' : ''}>
+                  ${state.actionLoading === o.orderId ? '<span class="spin">⏳</span> Đang xử lý...' : '✅ Duyệt & Kích hoạt PRO'}
+                </button>
+                <button class="btn-reject" data-reject="${o.orderId}" ${state.actionLoading === o.orderId ? 'disabled' : ''}>
+                  ${state.actionLoading === o.orderId ? '⏳...' : '❌ Từ chối'}
+                </button>
+              </div>` : ''}
+            ${o.status === 'approved' && o.approvedAt ? `<div class="order-timestamp approved">Duyệt lúc: ${formatDate(o.approvedAt)}</div>` : ''}
+            ${o.status === 'rejected' && o.rejectedAt ? `<div class="order-timestamp rejected">Từ chối lúc: ${formatDate(o.rejectedAt)}</div>` : ''}
+          </div>`).join('');
+      }
+
+      return `
+        <div class="admin-header">
+          <div>
+            <h1>🛡️ CutNos Admin</h1>
+            <div class="admin-header-sub">Quản lý đơn hàng & duyệt thanh toán PRO</div>
+          </div>
+          <div class="admin-header-right">
+            <div class="admin-email">${state.email}</div>
+            <div class="admin-role">Admin</div>
+            <button class="logout-btn" id="logout-btn">Đăng xuất</button>
+          </div>
+        </div>
+        <div class="admin-content">
+          <div class="filter-bar">
+            <button class="filter-btn ${state.filter === 'waiting_confirmation' ? 'active' : ''}" data-filter="waiting_confirmation">
+              ⏳ Chờ duyệt (${waitingCount})
+            </button>
+            <button class="filter-btn ${state.filter === 'all' ? 'active' : ''}" data-filter="all">
+              📋 Tất cả
+            </button>
+            <button class="refresh-btn" id="refresh-btn">🔄 Làm mới</button>
+          </div>
+          ${ordersHtml}
+        </div>`;
+    }
+
+    // ═══════ EVENTS ═══════
+    function bindLoginEvents() {
+      const form = document.getElementById('login-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+          state.loginError = 'Vui lòng nhập đầy đủ email và mật khẩu';
+          render(); return;
+        }
+
+        state.loginLoading = true; state.loginError = ''; render();
+        try {
+          const result = await loginWithEmail(email, password);
+          state.token = result.token;
+          state.refreshToken = result.refreshToken;
+          state.email = result.email;
+          state.screen = 'dashboard';
+          saveSession(); render(); loadOrders(); startAutoRefresh();
+        } catch (err) {
+          state.loginError = err.message;
+          state.loginLoading = false; render();
+        }
+      });
+    }
+
+    function bindDashboardEvents() {
+      document.getElementById('logout-btn')?.addEventListener('click', () => {
+        if (confirm('Bạn muốn đăng xuất?')) { clearSession(); render(); }
+      });
+
+      document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => { state.filter = btn.dataset.filter; loadOrders(); });
+      });
+
+      document.getElementById('refresh-btn')?.addEventListener('click', () => loadOrders());
+
+      document.querySelectorAll('[data-approve]').forEach(btn => {
+        btn.addEventListener('click', () => approveOrder(btn.dataset.approve));
+      });
+
+      document.querySelectorAll('[data-reject]').forEach(btn => {
+        btn.addEventListener('click', () => rejectOrder(btn.dataset.reject));
+      });
+    }
+
+    // ═══════ AUTO REFRESH (60s) ═══════
+    let autoRefreshTimer = null;
+    function startAutoRefresh() {
+      stopAutoRefresh();
+      autoRefreshTimer = setInterval(() => {
+        if (state.screen === 'dashboard' && !state.loading && !state.actionLoading) loadOrders();
+      }, 60000);
+    }
+    function stopAutoRefresh() { if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; } }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoRefresh();
+      else if (state.screen === 'dashboard') { loadOrders(); startAutoRefresh(); }
+    });
+
+    // ═══════ INIT ═══════
+    if (loadSession()) {
+      state.screen = 'dashboard'; render(); loadOrders(); startAutoRefresh();
+    } else {
+      state.screen = 'login'; render();
+    }
+  </script>
+</body>
+</html>
