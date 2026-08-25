@@ -779,29 +779,26 @@
     async function loadOrders() {
       state.loading = true; render();
       try {
-        const query = state.filter === 'waiting_confirmation'
-          ? {
-            structuredQuery: {
-              from: [{ collectionId: 'orders' }],
-              where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'waiting_confirmation' } } },
-              orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }]
-            }
+        const query = {
+          structuredQuery: {
+            from: [{ collectionId: 'orders' }],
+            orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
+            limit: 200
           }
-          : {
-            structuredQuery: {
-              from: [{ collectionId: 'orders' }],
-              orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
-              limit: 100
-            }
-          };
+        };
 
         const res = await firestoreRequest(':runQuery', { method: 'POST', body: JSON.stringify(query) });
         if (!res.ok) { state.orders = []; }
         else {
           const results = await res.json();
-          state.orders = Array.isArray(results)
+          let orders = Array.isArray(results)
             ? results.filter(r => r.document?.fields).map(r => parseOrderFields(r.document.fields))
             : [];
+          // Client-side filter for waiting_confirmation tab
+          if (state.filter === 'waiting_confirmation') {
+            orders = orders.filter(o => o.status === 'waiting_confirmation');
+          }
+          state.orders = orders;
         }
       } catch (e) {
         if (e.message !== 'Session expired') { state.orders = []; }
