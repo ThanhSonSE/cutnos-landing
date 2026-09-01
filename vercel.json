@@ -1,14 +1,14 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/privacy-policy", "destination": "/privacy.html" },
-    { "source": "/policy", "destination": "/privacy.html" },
-    { "source": "/privacy/promptvault", "destination": "/promptvault-privacy.html" },
-    { "source": "/privacy/clipbrief", "destination": "/clipbrief-privacy.html" },
-    { "source": "/privacy/affiscout", "destination": "/affiscout-privacy.html" },
-    { "source": "/privacy/cutnos", "destination": "/cutnos-privacy.html" },
-    { "source": "/privacy/affiscout-pro", "destination": "/affiscout-privacy.html" },
+    { "source": "/privacy", "destination": "/privacy/index.html" },
+    { "source": "/privacy-policy", "destination": "/privacy/index.html" },
+    { "source": "/policy", "destination": "/privacy/index.html" },
+    { "source": "/privacy/promptvault", "destination": "/privacy/promptvault.html" },
+    { "source": "/privacy/clipbrief", "destination": "/privacy/clipbrief.html" },
+    { "source": "/privacy/affiscout", "destination": "/privacy/affiscout.html" },
+    { "source": "/privacy/cutnos", "destination": "/privacy/cutnos.html" },
+    { "source": "/privacy/affiscout-pro", "destination": "/privacy/affiscout.html" },
     { "source": "/admin", "destination": "/admin.html" }
   ]
 }
